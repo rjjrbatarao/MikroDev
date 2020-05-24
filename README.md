@@ -3,6 +3,7 @@
 This is a library to communicate with the included esp8266 mikro shield firmware.
 Why MikroDev? because this is an esp8266 mikrotik api for developers.
 This library currently supports Arduino uno, mega, esp8266 and stm32f103cxxx
+Note: this is master -> slave communication library
 
 ### Features
 
@@ -38,6 +39,7 @@ Unlocked version
 
 ```
 Arduino IDE
+Arduino softwareserial library
 Knowledge in arduino and c++ programming
 Knowledge in html and javascript
 ```
@@ -45,6 +47,11 @@ Knowledge in html and javascript
 ### Installing
 
 Simply download this repo and install on arduino ide
+Upload the firmware included on bin folder, select your device if its ESP01 or Nodemcu
+
+### Connection
+Arduino tx -> esp rx
+Arduino rx -> esp tx
 
 ## Sample 
 
@@ -87,7 +94,8 @@ dev.update();
 }
 ```
 Note: the dev.update() only needed if using events based response
-Please check included samples to fiddle with
+Also F() macro are used to save ram.
+Please check included samples for for learning
 
 ## Documentation
 
@@ -96,8 +104,9 @@ Root commands:
 config, wifi, event, type, server, verify, verifier, timer, eeprom, rest ,connect, array, task and api
 ```
 
+Command usage:
 ```
-   > config mode1 mode2 mode3 mode4 mode5
+  > config mode1 mode2 mode3 mode4 mode5
    mode1: -d -r or -o
    mode2: -s or -o , -s = api-ssl enabled
    mode3: -o or key , key is the signature when api-ssl is enabled
@@ -107,62 +116,62 @@ config, wifi, event, type, server, verify, verifier, timer, eeprom, rest ,connec
    note: if -rd is enabled additional second parameter is used on rest and type to identify its event_id
    note: array command is enabled when -rd is defined
    
-   > wifi sta_ssid sta_password/mode1 ap_ssid/mode2 ap_password/mode3 wireless_mode phy_mode tx_power
+  > wifi sta_ssid sta_password/mode1 ap_ssid/mode2 ap_password/mode3 wireless_mode phy_mode tx_power
    sta_ssid: when set to -o enables smartConfig else sets the ssid to connect
    mode1&2&3: -o for blank
    wireless_mode: -a -s -as
    phy_mode: -b -g -n
    tx_power: -l and -h
 
-   > event event_name1 event_name2 event_name3 event_name4 event_name5
+  > event event_name1 event_name2 event_name3 event_name4 event_name5
    note: default event name are event0 ... event4, you can use this to override event names
    note: maximum of 5 events you can use
    
-   > type num1 num2 num3 ...
+  > type num1 num2 num3 ...
    note: this only applies to config -o -o -o -a
    num1&2&3..10: 1 or 0 only to change key variables types to int or words respectively
    note: this corresponds to server keys count, if num1-num3 then key1-key3
    
-   > type event_id num1 num2 num3 ...
+  > type event_id num1 num2 num3 ...
    note: this only applies to config -o -o -o -a -rd
    
-   > server port key1 key2 key3 ... key10
+  > server port key1 key2 key3 ... key10
    note: when config ... -rd enable keys can be omitter therefor server port is used
    port: rest server port
    key1&2&3..10: 
    
-   > rest var0 var1 var2 var3 ... var10
+  > rest var0 var1 var2 var3 ... var10
    note: this only applies to config -d -o -o -a 
    var0&1&2&3..10: overridable variable key and value pair, check type how to change the data type
    callback: parameters passed to the api json formatted
    
-   > rest event_id var1 var2 var3 ... var10
+  > rest event_id var1 var2 var3 ... var10
    note: this only applies to config -d -o -o -a -rd specify which event to modify
    var0&1&2&3..10: overridable variable key and value pair, check type how to change the data type
    callback: parameters passed to the api json formatted
    
-   > array event_id key_1_1 key_1_1 key_1_1 ...key_1_1
+  > array event_id key_1_1 key_1_1 key_1_1 ...key_1_1
    note: this is enabled when reponse dimension -rd is enabled
    note: this replaces command server key1 key2 key3...... thats why command server port is only used to initialize
    
-   > task:
+  > task:
    task_id: 0 for check for wifi link status, 1 for code generator, 2 for wifi info ip, device_id and rssi
 
-   > task 0 name mode
+  > task 0 name mode
    name: -o to use default name as link
    mode: -ss for wifi status
    callback:
    
-   > task 1 name mode1 mode2
+  > task 1 name mode1 mode2
    name: -o to use default name as link
    mode1: -l if lower case or -u if upper case
    mode2: length of code to generate if blank default of 8 is generated
    callback:
    
-   > task 2 name mode
+  > task 2 name mode
    mode -gt to get board info
    
-   > timer timer_id timername/mode1 mode2 timeout increments
+  > timer timer_id timername/mode1 mode2 timeout increments
    timer_id: 0 - 5
    mode1: -o will revert to default timername tm_0 ...tm_5
    mode2: -d to delete and -e to enable
@@ -170,10 +179,14 @@ config, wifi, event, type, server, verify, verifier, timer, eeprom, rest ,connec
    increments: how many times it will timeout ex timer 0 -o -e 1 60 this with 1 second timeout and 60 increments is 1 minute
    callback: time remaining in seconds and decending
    
-   > connect username password/mode port
+  > eeprom mode data
+   mode: -p put the data in eeprom, -g get the data from eeprom
+   data: 256byte max length data
+   
+  > connect username password/mode port
    mode: -o for blank password
     
-   > api arg1 arg2 arg3
+  > api arg1 arg2 arg3
    arg1&2&3... mikrotik api commands
    consult mikrotik api for references
    this uses fully compatible mikrotik api

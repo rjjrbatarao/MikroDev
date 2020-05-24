@@ -56,21 +56,18 @@ mikrodev dev(softSer);
 
 
 void modifyCommand() {
-
   char reponseData[rx_buffer];
   dev.sendCommand(F("api /ip/hotspot/user/set =numbers=test23 =comment=test45"), "=limit-uptime=", reponseData);
   Serial.println(reponseData);
 }
 
-void modifyCommand() {
-  getProgmem(1);
+void printCommand() {
   char reponseData[rx_buffer];
   dev.sendCommand(F("api /ip/hotspot/user/print ?name=test23 =.proplist=limit-uptime"), "=comment=", reponseData);
   Serial.println(reponseData);
 }
 
 void createCommand() {
-  getProgmem(2);
   char reponseData[rx_buffer];
   dev.sendCommand(F("api /ip/hotspot/user/add =name=test23 =comment=test23 =limit-uptime=10h"), "name", reponseData);
   Serial.println(reponseData);
