@@ -43,10 +43,10 @@ Knowledge in html and javascript
 ```
 
 ### Installing
-
+```
 Simply download this repo and install on arduino ide
-Upload the firmware included on bin folder, select your device if its ESP01 or Nodemcu
-
+Upload the firmware included on bin folder, use freematics arduino builder to upload firmware
+```
 ### Connection
 Arduino tx -> esp rx
 Arduino rx -> esp tx
