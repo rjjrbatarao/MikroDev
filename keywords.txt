@@ -1,0 +1,9 @@
+# Datatypes (KEYWORD1)
+MikroDev	KEYWORD1
+
+# Methods and Functions (KEYWORD2)
+mikrodev		KEYWORD2
+sendCommand		KEYWORD2
+event			KEYWORD2
+
+# Constants (LITERAL1)
