@@ -7,13 +7,11 @@ Note: this is master -> slave communication library
 
 ### Features
 
-Note: this features are are the capability of MikroDev library to send command to the firmware.
+Note: this features are the capability of MikroDev library to send command to the firmware.
 
 Basic version
 ```
 > Full mikrotik api on standard user define port
-> Code generator max length of 16 characters
-> Total of five asynchronous timers
 > wifi status
 > esp8266 smartConfig
 > Wifi phy B\G\N selectable
