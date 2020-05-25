@@ -1,19 +1,21 @@
 # MikroDev
 
-This is a library to communicate with the included esp8266 mikro shield firmware.
-Why MikroDev? because this is an esp8266 mikrotik api for developers.
+This is a library are used to communicate with the included esp8266 mikro shield firmware.
+This enables you to develop mikrotik web apps or any automation device for mikrotik like for example,
+monitoring, external schedulers, hotspot automations, and anything you can think of using arduino boards.
+Why MikroDev? because this is an mikrotik api for developers using microcontrollers.
 This library currently supports Arduino uno, mega, esp8266 and stm32f103cxxx
-Note: this is master -> slave communication library
+This library is the master library which communicates on the included slave firmware
 
 ### Features
 
-Note: this features are the capability of MikroDev library to send command to the firmware.
+Note: this features are the capability of MikroDev library to send and receive command to and from the slave firmware.
 
 Basic version
 ```
 > Full mikrotik api on standard user define port
-> wifi status
-> esp8266 smartConfig
+> Wifi status and board status
+> Esp8266 smartConfig
 > Wifi phy B\G\N selectable
 ```
 
@@ -30,6 +32,7 @@ Unlocked version
 > REST api path enable or disable during runtime
 > REST api dynamic parameter response capable json encoded callback 
 > Esp8266 smartConfig
+> Wifi status and board status
 > Wifi phy B\G\N selectable
 > REST server port selectable
 ```
@@ -78,7 +81,7 @@ Send mikrotik dynamic command
   sprintf(buffer,"api /ip/hotspot/user/add =name=%s =comment=%s =limit-uptime=%s",username,comment,timelimit);
   dev.sendCommand(buffer);
 ```
-Send with response event, this is an alternative to using command with emmediate respose
+Send with response event, this is an alternative to using command with immediate respose
 
 ```cpp
 void eventFirst(char* response) {
@@ -110,7 +113,7 @@ Command usage:
    mode3: -o or key , key is the signature when api-ssl is enabled
    mode4: -a or -b , auto and basic, auto is rest api capable
    mode5: -rd enables the rest json response to be independently modified else if left blank then
-   all keys are shared among the events
+   all json response key and value are shared among the events
    note: if -rd is enabled additional second parameter is used on rest and type to identify its event_id
    note: array command is enabled when -rd is defined
    
@@ -180,9 +183,11 @@ Command usage:
   > eeprom mode data
    mode: -p put the data in eeprom, -g get the data from eeprom
    data: 256byte max length data
+   note: no need to to add data when using -g ie. eeprom -g
    
   > connect username password/mode port
    mode: -o for blank password
+   port: 8728 standard port or when modified can be any, 8729 api-ssl or any when modified in mikrotik router
     
   > api arg1 arg2 arg3
    arg1&2&3... mikrotik api commands
