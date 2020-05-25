@@ -1,11 +1,13 @@
 # MikroDev
 
 This is a library are used to communicate with the included esp8266 mikro shield firmware.
-This enables you to develop mikrotik web apps or any automation device for mikrotik like for example,
-monitoring, external schedulers, hotspot automations, and anything you can think of using arduino boards.
+This enables you to develop mikrotik web apps or any automation device for mikrotik, like for example,
+router monitoring, external mikrotik schedulers, hotspot automations, and anything you can think of using arduino boards.
+The mikrodev project aims to reduce program size on memory constrained mcu like the arduino by offloading the processing and communications to the slave.
+This saves alot of memory on the master mcu so you can even make a much complex projects using only arduino uno.
 Why MikroDev? because this is an mikrotik api for developers using microcontrollers.
-This library currently supports Arduino uno, mega, esp8266 and stm32f103cxxx
-This library is the master library which communicates on the included slave firmware
+This library is currently tested on Arduino uno, mega, esp8266 and stm32f103 bluepill.
+This library is the master library which communicates on the included slave firmware.
 
 ### Features
 
