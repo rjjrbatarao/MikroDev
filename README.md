@@ -9,7 +9,14 @@ Why MikroDev? because this is an mikrotik api for developers using microcontroll
 This library is currently tested on Arduino uno, mega, esp8266 and stm32f103 bluepill.
 This library is the master library which communicates on the included slave firmware.
 
-### Features
+### Todo
+```
+upload and update ota on slave and master(uno only) via slave internal webserver in ap mode
+online auto update on slave and master(uno only) using root command
+add server events, websocket if memory allows
+add more interesting features from suggestions
+```
+### Current Features
 
 Note: this features are the capability of MikroDev library to send and receive command to and from the slave firmware.
 
