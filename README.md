@@ -34,11 +34,11 @@ Unlocked version
 > Full Api-SSL through user defined port and ssl key
 > Code generator max length of 16 characters
 > Total of five asynchronous timers
-> Total of five unique REST api path using event command
-> Total of ten key json response per REST Path
+> Total of five unique REST api route using event command
+> Total of ten json key value pair response per REST route
 > Independent or shared json response on REST Path
-> REST api path protection using token or source ip can be turned on on off during run time
-> REST api path enable or disable during runtime
+> REST api route protection using token or source ip can be turned on on off during run time
+> REST api route enable or disable during runtime
 > REST api dynamic parameter response capable json encoded callback 
 > Esp8266 smartConfig
 > Wifi status and board status
