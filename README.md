@@ -49,6 +49,7 @@ Unlocked version
 
 ```
 Arduino IDE
+SdFat library https://github.com/greiman/SdFat
 Arduino softwareserial library
 Knowledge in arduino and c++ programming
 Knowledge in html and javascript
@@ -57,7 +58,7 @@ Knowledge in html and javascript
 ### Installing
 ```
 Simply download this repo and install on arduino ide
-Upload the firmware included on bin folder, use freematics arduino builder to upload firmware
+Upload the firmware included on bin folder, use Freematics arduino builder to upload firmware
 ```
 ### Connection
 Arduino tx -> esp rx
