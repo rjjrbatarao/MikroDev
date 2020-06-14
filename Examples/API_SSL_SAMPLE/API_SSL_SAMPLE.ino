@@ -81,30 +81,30 @@ SoftwareSerial softSer;
 #else
 #include <avr/pgmspace.h>
 #include <MemoryFree.h>
-SoftwareSerial softSer(10, 11);
+SoftwareSerial softSer(6, 7);
 #endif
+
+#define rx_buffer 48
 
 mikrodev dev(softSer);
 
 
-void createCommand() {
-
-  char reponseData[rx_buffer];
-  dev.sendCommand(F("api /ip/hotspot/user/set =numbers=test23 =comment=test45"), "=limit-uptime=", reponseData);
-  Serial.println(reponseData);
-}
-
 void modifyCommand() {
-  getProgmem(1);
-  char reponseData[rx_buffer];
-  dev.sendCommand(F("api /ip/hotspot/user/print ?name=test23 =.proplist=limit-uptime"), "=comment=", reponseData);
+
+  char reponseData[100];
+  dev.sendCommand(F("api /ip/hotspot/user/set =numbers=test23 =comment=test45"), "=comment=", reponseData);
   Serial.println(reponseData);
 }
 
 void printCommand() {
-  getProgmem(2);
-  char reponseData[rx_buffer];
-  dev.sendCommand(F("api /ip/hotspot/user/add =name=test23 =comment=test23 =limit-uptime=10h"), "name", reponseData);
+  char reponseData[100];
+  dev.sendCommand(F("api /ip/hotspot/user/print ?name=test23 =.proplist=limit-uptime"), "=limit-uptime=", reponseData);
+  Serial.println(reponseData);
+}
+
+void createCommand() {
+  char reponseData[100];
+  dev.sendCommand(F("api /ip/hotspot/user/add =name=test23 =comment=test23 =limit-uptime=10h"), "=name=", reponseData);
   Serial.println(reponseData);
 }
 

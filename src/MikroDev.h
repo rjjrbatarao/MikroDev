@@ -23,15 +23,7 @@
 	#define STM32
 #endif
 
-#define EVENT_0 1
-#define EVENT_1 2
-#define EVENT_2 3
-#define EVENT_3 4
-#define EVENT_4 5
 
-//#define RECEIVE_DONE "DONE"
-//#define RECEIVE_FAIL "FAIL"
-//#define RECEIVE_READY "READY"
 #define NUMBER_EVENTS 5
 
 #define BAUD_RATE 9600
@@ -65,15 +57,19 @@ class mikrodev {
 	#endif
 	void sendCommand(char* command);
 	void sendCommand(const __FlashStringHelper* command);
-	void sendCommand(char* command, char* arg_name, char(&response)[RX_BUFFER]);
-	void sendCommand(const __FlashStringHelper* command, char* arg_name, char(&response)[RX_BUFFER]);
-    void event(int& type, char(&response)[RESPONSE_SIZE], char* events_array[NUMBER_EVENTS]);
+	void sendCommand(char* command, char* arg_name, char* response);
+	void sendCommand(const __FlashStringHelper* command, char* arg_name, char* response);
+    void event(int& type, char* response, char* events_array[NUMBER_EVENTS]);
 	void event(char * event_name, void (*f)(char*));
 	void update();
 	void clearBuffer();
 	
 	private:
+	#ifdef ENABLE_HS
+	bool _isHardSerial = true;
+	#else
 	bool _isHardSerial = false;
+	#endif
 	#ifndef STM32
 	#if defined(ESP8266) || defined(__AVR_ATmega168__) ||defined(__AVR_ATmega168P__) ||defined(__AVR_ATmega328P__) || defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
 	swSer* _sofser;
@@ -82,13 +78,13 @@ class mikrodev {
 	hdSer* _hardser;
 	char _buffer[RESPONSE_SIZE];
 	uint8_t _event_type;
-	char _data_rx[RX_BUFFER];
+	
 	char _response[RESPONSE_SIZE];
-	char _arg_name[RX_BUFFER];
-	bool onReceive();
+	char* onReceive(char* argn);
 	bool onEventReceive();
 	bool responseData(char* arg);
 	const char* _RECEIVE_READY = "READY";
+	const char* _RECEIVE_DONE = "DONE";
 	char* _events_array[NUMBER_EVENTS];
 	bool _event_flag = false;
     uint8_t _events_index;

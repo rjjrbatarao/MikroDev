@@ -31,7 +31,7 @@ SdFat sd;
 File ceateFile;
 
 char* dynamicCommand[MAX_ARG_COUNTS] = {"32", "12", "43", "2"};
-char command_temp[64];
+
 
 void freeMem() {
 #if defined(ESP8266)
@@ -50,19 +50,19 @@ void initialization() {
   }
 }
 
-void eventFirst(String response) {
+void eventFirst(char* response) {
   Serial.println(response);
 }
-void eventSecond(String response) {
+void eventSecond(char* response) {
   Serial.println(response);
 }
-void eventThird(String response) {
+void eventThird(char* response) {
   Serial.println(response);
 }
-void event3(String response) {
+void eventFour(char* response) {
   Serial.println(response);
 }
-void event4(String response) {
+void eventFive(char* response) {
   Serial.println(response);
 }
 
@@ -125,6 +125,7 @@ bool sendLine(int index, const char* file) {
         Serial.println(line);
         dev.sendCommand(line);
       } else {
+        char command_temp[64];
         sprintf(command_temp, line, dynamicCommand[0], dynamicCommand[1], dynamicCommand[2], dynamicCommand[3], dynamicCommand[4]);
         Serial.println(command_temp);
         dev.sendCommand(command_temp);
@@ -144,8 +145,8 @@ void setup() {
   dev.event("ev3:", eventThird);
 
   // INTERNAL EVENTS FROM TASK MAX 5
-  dev.event("code:", event3);
-  dev.event("link:", event4);
+  dev.event("code:", eventFour);
+  dev.event("link:", eventFive);
 
   Serial.println("start");
 
@@ -154,7 +155,8 @@ void setup() {
   if (!sd.begin(chipSelect, SD_SCK_MHZ(50))) {
     sd.initErrorHalt();
   }
-
+  
+  //******************** INITIALIZATION COMMANDS **************
   initialization();
 }
 
@@ -180,4 +182,3 @@ void loop() {
   }
   dev.update();
 }
-
