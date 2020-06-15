@@ -195,6 +195,7 @@ Command usage:
    mode: -p put the data in eeprom, -g get the data from eeprom
    data: 256byte max length data
    note: no need to to add data when using -g ie. eeprom -g
+   callback: use "eeprom:" as event parser ie. dev.event("eeprom:",getConfig())
    
   > connect username password/mode port
    mode: -o for blank password
@@ -218,7 +219,7 @@ Command usage:
   example: verifier kdi923kjr34 -o 0 1 0
   token_generator_length: specify token generator length upto 16 char long
   example: -o 16 0 1 0
-  note: using the generator you must set an event callback with "token:" as the first parameter to capture the generated token on master
+  note: using the generator you must use "token:" as event parser ie. dev.event("token:",getToken())
   additional note: if both custom_token and token_generator_length are filled the custom token willbe overidden by the token generator
   
   > api arg1 arg2 arg3
