@@ -62,7 +62,7 @@ mikrodev dev(softSer);
 
 void initialization() {
   dev.sendCommand("config -o -o -o -a");
-  dev.sendCommand("wifi PISOWIFI -o -o -o -s -g -h");
+  dev.sendCommand("wifi WIFISSID -o -o -o -s -g -h");
   dev.sendCommand("event client server queue topup custom");
   dev.sendCommand("server 80 time click inet");
 }

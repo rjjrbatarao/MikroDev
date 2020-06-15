@@ -64,7 +64,7 @@ int counter;
 
 void initialization() {
   dev.sendCommand("config -o -o -o -a");
-  dev.sendCommand("wifi PISOWIFI -o -o -o -s");
+  dev.sendCommand("wifi WIFISSID -o -o -o -s");
   dev.sendCommand("event boy bear pig bird dog");
   dev.sendCommand("server 80 time click inet");
 }

@@ -81,7 +81,7 @@ SoftwareSerial softSer;
 #else
 #include <avr/pgmspace.h>
 #include <MemoryFree.h>
-SoftwareSerial softSer(6, 7);
+SoftwareSerial softSer(6, 7); // (rx tx) connect 6 to slave tx and 7 to rx
 #endif
 
 #define rx_buffer 48
@@ -90,27 +90,20 @@ mikrodev dev(softSer);
 
 
 void modifyCommand() {
-
-  char reponseData[100];
-  dev.sendCommand(F("api /ip/hotspot/user/set =numbers=test23 =comment=test45"), "=comment=", reponseData);
-  Serial.println(reponseData);
+  dev.sendCommand(F("api /ip/hotspot/user/set =numbers=test23 =comment=test45"));
 }
 
 void printCommand() {
-  char reponseData[100];
-  dev.sendCommand(F("api /ip/hotspot/user/print ?name=test23 =.proplist=limit-uptime"), "=limit-uptime=", reponseData);
-  Serial.println(reponseData);
+  dev.sendCommand(F("api /ip/hotspot/user/print ?name=test23 =.proplist=limit-uptime"));
 }
 
 void createCommand() {
-  char reponseData[100];
-  dev.sendCommand(F("api /ip/hotspot/user/add =name=test23 =comment=test23 =limit-uptime=10h"), "=name=", reponseData);
-  Serial.println(reponseData);
+  dev.sendCommand(F("api /ip/hotspot/user/add =name=test23 =comment=test23 =limit-uptime=10h"));
 }
 
 void initialization() {
   dev.sendCommand(F("config -o -s 1D:5A:51:E6:EE:19:DE:67:50:2C:BA:87:1A:FF:E0:30:5F:74:14:AB"));
-  dev.sendCommand(F("wifi PISOWIFI -o -o -o -s"));
+  dev.sendCommand(F("wifi WIFISSID -o -o -o -s"));
   dev.sendCommand(F("connect test -o 8729"));
 }
 

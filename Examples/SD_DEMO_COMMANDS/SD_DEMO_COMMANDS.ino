@@ -13,7 +13,7 @@ bool storeSampleCommands() {
   if (ceateFile) {
 
     ceateFile.println(F("config -d -o -o -a -rd"));
-    ceateFile.println(F("wifi PISOWIFI -o -o -o -s -g -h"));
+    ceateFile.println(F("wifi WIFISSID -o -o -o -s -g -h"));
     ceateFile.println(F("event ev1 ev2 ev3"));
 
     // json key

@@ -96,13 +96,17 @@ mikrodev dev(softSer);
 void task0(){
   dev.sendCommand(F("task 0 -o -ss")); 
   // same as task 0 link -ss 
-  // can be task 0 link_status -ss but make sure to change internal event to link_status:
+  // can be task 0 link_status -ss but make sure to change internal event name to link_status: 
+  //ie.dev.event("link_status:", event4);
 }
 void task1(){
   dev.sendCommand(F("task 1 -o -u 12"));
   // same as task 1 code -u -12
   // generates 12 char long of random code with upper case letters
+  // for lower case you guessed it use -l
 } 
+
+//ROUTE AND KEY TABLE, NOTE: key can be any 10 char length word
 /*
  *  |ev0|ev1|ev2|
  *   -----------
@@ -113,7 +117,7 @@ void task1(){
  */     
 void initialization() {
   dev.sendCommand(F("config -o -o -o -a -rd"));
-  dev.sendCommand(F("wifi PISOWIFI -o -o -o -s -g -h"));
+  dev.sendCommand(F("wifi WIFISSID -o -o -o -s -g -h"));
   dev.sendCommand(F("event ev_0 ev_1 ev_2"));  
   dev.sendCommand(F("array 0 a_1 a_2 a_3"));  
   dev.sendCommand(F("array 1 b_1 b_2 b_3 b_4")); 

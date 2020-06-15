@@ -88,7 +88,7 @@ mikrodev dev(softSer);
 
 void initialization() {
   dev.sendCommand(F("config -d -o -o -b"));
-  dev.sendCommand(F("wifi PISOWIFI -o -o -o -s")); 
+  dev.sendCommand(F("wifi WIFISSID -o -o -o -s")); 
   dev.sendCommand(F("api /ip/hotspot/user/add =name=userkasjd =comment=test23 =limit-uptime=10h"));
 }
 

@@ -56,26 +56,20 @@ mikrodev dev(softSer);
 
 
 void modifyCommand() {
-  char reponseData[rx_buffer];
-  dev.sendCommand(F("api /ip/hotspot/user/set =numbers=test23 =comment=test45"), "=limit-uptime=", reponseData);
-  Serial.println(reponseData);
+  dev.sendCommand(F("api /ip/hotspot/user/set =numbers=test23 =comment=test45"));
 }
 
 void printCommand() {
-  char reponseData[rx_buffer];
-  dev.sendCommand(F("api /ip/hotspot/user/print ?name=test23 =.proplist=limit-uptime"), "=comment=", reponseData);
-  Serial.println(reponseData);
+  dev.sendCommand(F("api /ip/hotspot/user/print ?name=test23 =.proplist=limit-uptime"));
 }
 
 void createCommand() {
-  char reponseData[rx_buffer];
-  dev.sendCommand(F("api /ip/hotspot/user/add =name=test23 =comment=test23 =limit-uptime=10h"), "name", reponseData);
-  Serial.println(reponseData);
+  dev.sendCommand(F("api /ip/hotspot/user/add =name=test23 =comment=test23 =limit-uptime=10h"));
 }
 
 void initialization() {
   dev.sendCommand("config -o");
-  dev.sendCommand("wifi PISOWIFI -o -o -o -s");
+  dev.sendCommand("wifi WIFISSID -o -o -o -s");
   dev.sendCommand("connect test -o 8728");
 }
 

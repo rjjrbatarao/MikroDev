@@ -55,13 +55,13 @@ mikrodev dev(softSer);
 
 void createCommand() {
   char reponseData[rx_buffer];
-  dev.sendCommand("api /ip/hotspot/user/set =numbers=test23 =comment=test45", "=limit-uptime=", reponseData);
+  dev.sendCommand("api /ip/hotspot/user/set =numbers=test23 =comment=test45", "=limit-uptime=", reponseData); // has bug as the moment please use events instead
   Serial.println(reponseData);
 }
 
 void initialization() {
   dev.sendCommand("config -o");
-  dev.sendCommand("wifi PISOWIFI -o -o -o -s");
+  dev.sendCommand("wifi WIFISSID -o -o -o -s");
   dev.sendCommand("connect test -o 8728");
 }
 

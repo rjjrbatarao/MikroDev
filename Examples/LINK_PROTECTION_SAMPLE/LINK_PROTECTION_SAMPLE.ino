@@ -80,10 +80,10 @@ void initialization() {
   dev.sendCommand(F("config -r"));
   delay(500);
   dev.sendCommand(F("config -o -o -o -a -rd"));
-  dev.sendCommand(F("wifi PISOWIFI -o -o -o -s -g -h"));
+  dev.sendCommand(F("wifi WIFISSID -o -o -o -s -g -h"));
   dev.sendCommand(F("event dir1 dir2 dir3"));
   dev.sendCommand(F("verify 1 0 0"));
-  dev.sendCommand(F("verifier -g 8 0 1 0"));        
+  dev.sendCommand(F("verifier -o 8 0 1 0"));        
   dev.sendCommand(F("array 0 a_1 a_2 a_3"));  
   dev.sendCommand(F("array 1 b_1 b_2 b_3 b_4")); 
   dev.sendCommand(F("array 2 c_1 c_2")); 

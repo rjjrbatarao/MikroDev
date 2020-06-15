@@ -75,7 +75,7 @@ void sendRestData(){
  */     
 void initialization() {
   dev.sendCommand("config -o -o -o -a -rd");
-  dev.sendCommand("wifi PISOWIFI -o -o -o -s -g -h");
+  dev.sendCommand("wifi WIFISSID -o -o -o -s -g -h");
   dev.sendCommand("event ev1 ev2 ev3");  
   dev.sendCommand("dimension 0 a_1 a_2 a_3");  
   dev.sendCommand("dimension 1 b_1 b_2 b_3 b_4"); 

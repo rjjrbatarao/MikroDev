@@ -80,7 +80,7 @@ void initialization() {
   dev.sendCommand(F("config -r"));
   delay(500);
   dev.sendCommand(F("config -o -o -o -a -rd"));
-  dev.sendCommand(F("wifi PISOWIFI -o -o -o -s -g -h"));
+  dev.sendCommand(F("wifi WIFISSID -o -o -o -s -g -h"));
   dev.sendCommand(F("event dir1/sub1 dir1/sub2 dir2/sub1"));   
   dev.sendCommand(F("dimension 0 a_1 a_2 a_3"));  
   dev.sendCommand(F("dimension 1 b_1 b_2 b_3 b_4")); 

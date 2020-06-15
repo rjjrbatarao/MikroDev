@@ -63,7 +63,7 @@ const char arg_1[] PROGMEM = {"=comment="};
 const char arg_2[] PROGMEM = {"=limit-uptime="};
 
 const char init_0[] PROGMEM = {"config -o"};
-const char init_1[] PROGMEM = {"wifi PISOWIFI -o -o -o -s"};
+const char init_1[] PROGMEM = {"wifi WIFISSID -o -o -o -s"};
 const char init_2[] PROGMEM = {"connect test -o 8728"};
 
 const char *const arg_table[] PROGMEM = {arg_0, arg_1, arg_2};
@@ -88,23 +88,20 @@ void getInitProgmem(int index){
 
 void createCommand() {
   getProgmem(0);
-  char reponseData[rx_buffer];
-  dev.sendCommand(commandBuffer, argBuffer, reponseData);
-  Serial.println(reponseData);
+  dev.sendCommand(commandBuffer);
+
 }
 
 void modifyCommand() {
   getProgmem(1);
-  char reponseData[rx_buffer];
-  dev.sendCommand(commandBuffer, argBuffer, reponseData);
-  Serial.println(reponseData);
+  dev.sendCommand(commandBuffer);
+
 }
 
 void printCommand() {
   getProgmem(2);
-  char reponseData[rx_buffer];
-  dev.sendCommand(commandBuffer, argBuffer, reponseData);
-  Serial.println(reponseData);
+  dev.sendCommand(commandBuffer);
+
 }
 
 void initialization() {

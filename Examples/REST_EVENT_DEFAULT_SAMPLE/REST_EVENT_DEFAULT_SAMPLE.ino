@@ -62,7 +62,7 @@ mikrodev dev(softSer);
 
 void initialization() {
   dev.sendCommand("config -d -o -o -a");
-  dev.sendCommand("wifi PISOWIFI -o -o -o -s");
+  dev.sendCommand("wifi WIFISSID -o -o -o -s");
   dev.sendCommand("server 80 time click inet");
   dev.sendCommand("connect test -o 8728");
 

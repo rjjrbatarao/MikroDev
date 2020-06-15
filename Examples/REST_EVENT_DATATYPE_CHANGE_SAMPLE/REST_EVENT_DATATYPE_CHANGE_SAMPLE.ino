@@ -62,7 +62,7 @@ mikrodev dev(softSer);
 
 void initialization() {
   dev.sendCommand("config -o -o -o -a");
-  dev.sendCommand("wifi PISOWIFI -o -o -o -s -g -h");
+  dev.sendCommand("wifi WIFISSID -o -o -o -s -g -h");
   dev.sendCommand("event ev1 ev2 ev3 ev4 ev5");
   dev.sendCommand("type 1 0 1 0 1");
   dev.sendCommand("server 80 rock paper corn clock glass");

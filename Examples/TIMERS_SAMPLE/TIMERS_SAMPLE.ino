@@ -95,21 +95,18 @@ SoftwareSerial softSer(5, 6);
 mikrodev dev(softSer);
 
 void start4Timer() {
-  dev.sendCommand(F("timer 4 tm4 -o 1 15"));
+  dev.sendCommand(F("timer 4 tm4 -e 1 15"));
 }
-/*
-    |ev1|ev2|ev3|
-     -----------
-     a_1|b_1|c_1
-     a_2|b_2|c_2
-     a_3|b_3|
-        |b_4|
-*/
+
+void disable4Timer() {
+  dev.sendCommand(F("timer 4 tm4 -d"));
+}
+
 void initialization() {
   dev.sendCommand(F("config -o -o -o -b"));
-  dev.sendCommand(F("timer 0 tm0 -o 1 60"));
-  dev.sendCommand(F("timer 1 tm1 -o 5 10"));
-  dev.sendCommand(F("timer 2 tm2 -o 2 10"));
+  dev.sendCommand(F("timer 0 tm0 -e 1 60"));
+  dev.sendCommand(F("timer 1 tm1 -e 5 10"));
+  dev.sendCommand(F("timer 2 tm2 -e 2 10"));
 
 }
 
@@ -122,14 +119,14 @@ void timer1(char* response) {
   Serial.print("timer 1: ");
   Serial.println(response);
   if (strcmp(response, "disabled") == 0) {
-    dev.sendCommand(F("timer 3 tm3 -o 3 10"));
+    dev.sendCommand(F("timer 3 tm3 -e 3 10"));
   }
 }
 void timer2(char* response) {
   Serial.print("timer 2: ");
   Serial.println(response);
   if(strcmp(response, "disabled") == 0) {
-    dev.sendCommand(F("timer 2 tm2 -o 3 10"));
+    dev.sendCommand(F("timer 2 tm2 -e 3 10"));
   }
 }
 void timer3(char* response) {
@@ -170,7 +167,10 @@ void loop() {
     if (c == 's') {
       start4Timer();
       freeMem();
-    }
+    } else if(){
+	  disable4Timer();
+	  freeMem();
+	}
   }
   dev.update();
 }

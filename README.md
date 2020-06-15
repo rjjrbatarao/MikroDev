@@ -49,8 +49,9 @@ Unlocked version
 
 ```
 Arduino IDE
-SdFat library https://github.com/greiman/SdFat
-Arduino softwareserial library
+SdFat library [SdFat](https://github.com/greiman/SdFat)
+MemoryFree library [MemoryFree](https://github.com/McNeight/MemoryFree)
+Arduino standard softwareserial library
 Knowledge in arduino and c++ programming
 Knowledge in html and javascript
 ```
@@ -182,13 +183,13 @@ Command usage:
   > task 2 name mode
    mode -gt to get board info
    
-  > timer timer_id timername/mode1 mode2 timeout increments
+  > timer timer_id timername/mode1 mode2 interval increments
    timer_id: 0 - 5
-   mode1: -o will revert to default timername tm_0 ...tm_5
-   mode2: -d to delete and -e to enable
-   timeout: timeout in seconds
-   increments: how many times it will timeout ex timer 0 -o -e 1 60 this with 1 second timeout and 60 increments is 1 minute
-   callback: time remaining in seconds and decending
+   mode1: -o will revert to default timername tm_0 ...tm_5 or overridable by any 7 char long name
+   mode2: -d to delete and -e to enable, -o is also accepted as enable
+   interval: timeout in seconds
+   increments: interval multiplier ie. timer 0 -o -e 1 60 this with 1 second interval and 60 increments 1x60 is 1 minute
+   callback: time remaining in decending counter based on interval per increments
    
   > eeprom mode data
    mode: -p put the data in eeprom, -g get the data from eeprom
@@ -198,7 +199,28 @@ Command usage:
   > connect username password/mode port
    mode: -o for blank password
    port: 8728 standard port or when modified can be any, 8729 api-ssl or any when modified in mikrotik router
-    
+  
+  > verify 0/1 0/1 0/1 ...   equals to number of event route to protect
+  > verifier custom_token token_generator_length 0/1 0/1 0/1 .... 
+   verify | verifier | protection_mode
+   0	  |  0		 |   none
+   1	  |  0		 |   protect_by_ip
+   0	  |  1		 |   protect_by_token
+   1	  |  1		 |   none
+  protect_by_ip: uses source ip validator
+  protect_by_token: uses server token validator
+  note: in rest use the first parameter as the ip or token guard
+  example ip: http://10.0.0.12:80/ev_0?ip=10.0.0.13&param1=lasdlaskdlaksd&paramn=jahsdjahsdja
+  example token: http://10.0.0.12:80/ev_1?token=ka34kq223h&param1=lasdlaskdlaksd&paramn=jahsdjahsdja
+  note: in the example you can see that route0 is protected by ip while route1 is protected by token else no protection is set
+  additional note: ip= and token= can be anything or both thesame it can be guard= or 0ujwerj= any=
+  custom_token: any 16 char long random string.
+  example: verifier kdi923kjr34 -o 0 1 0
+  token_generator_length: specify token generator length upto 16 char long
+  example: -o 16 0 1 0
+  note: using the generator you must set an event callback with "token:" as the first parameter to capture the generated token on master
+  additional note: if both custom_token and token_generator_length are filled the custom token willbe overidden by the token generator
+  
   > api arg1 arg2 arg3
    arg1&2&3... mikrotik api commands
    consult mikrotik api for references

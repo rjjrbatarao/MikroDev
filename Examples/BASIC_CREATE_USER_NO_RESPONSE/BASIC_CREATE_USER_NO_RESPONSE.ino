@@ -59,7 +59,7 @@ void createCommand() {
 
 void initialization() {
   dev.sendCommand("config -o");
-  dev.sendCommand("wifi PISOWIFI -o -o -o -s");
+  dev.sendCommand("wifi WIFISSID -o -o -o -s");
   dev.sendCommand("connect test -o 8728");
 }
 
